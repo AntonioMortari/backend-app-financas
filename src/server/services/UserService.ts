@@ -1,6 +1,7 @@
 import { AppError } from '../errors/AppError';
 import { IUserCreate, UserRepository } from '../interfaces/UserInterfaces';
 import { StatusCodes } from 'http-status-codes';
+import { hash } from '../utils/encryptService';
 
 class UserService {
 
@@ -18,7 +19,7 @@ class UserService {
             throw new AppError(`User with email ${email} exists`, StatusCodes.BAD_REQUEST);
         }
 
-        return await this.repository.create({ name, email, password });
+        return await this.repository.create({ name, email, password: await hash(password) });
     }
 
 }
