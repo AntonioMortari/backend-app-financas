@@ -11,4 +11,5 @@ export interface UserRepository {
     findById: (id: number) => Promise<User | null>
     findByEmail: (email: string) => Promise<User | null>
     delete: (id: number) => Promise<void>
+    setBalance:(userId: number, newBalance: number) => Promise<void>
 }

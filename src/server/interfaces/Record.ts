@@ -1,4 +1,4 @@
-import { Record } from '@prisma/client';
+import { Record, User } from '@prisma/client';
 
 export interface IRecordCreate {
     value: number;
@@ -13,7 +13,7 @@ export interface IRecordUpdate {
 }
 
 export interface RecordRepository {
-    create: ({ value, date, userId, typeId }: IRecordCreate) => Promise<number>
+    create: ({ value, date, userId, typeId }: IRecordCreate) => Promise<Record>
     findAll: (user_id: number) => Promise<Record[]>
     findById: (id: number) => Promise<Record | null>
     delete: (id: number) => Promise<void>

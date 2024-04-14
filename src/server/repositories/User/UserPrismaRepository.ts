@@ -36,6 +36,17 @@ class UserPrismaRepository implements UserRepository {
         await prisma.user.delete({ where: { id } });
     }
 
+    public async setBalance(userId: number, newBalance: number): Promise<void>{
+        await prisma.user.update({
+            data:{
+                balance: newBalance
+            },
+            where:{
+                id: userId
+            }
+        });
+    }
+
 }
 
 export { UserPrismaRepository };

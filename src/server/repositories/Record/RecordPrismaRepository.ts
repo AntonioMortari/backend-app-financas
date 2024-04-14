@@ -1,11 +1,11 @@
-import { Record } from '@prisma/client';
+import { Record, User } from '@prisma/client';
 import { prisma } from '../../database/prisma';
 import { IRecordCreate, IRecordUpdate, RecordRepository } from '../../interfaces/Record';
 
 
 class RecordPrismaRepository implements RecordRepository {
 
-    public async create({ value, date, userId, typeId }: IRecordCreate): Promise<number> {
+    public async create({ value, date, userId, typeId }: IRecordCreate): Promise<Record> {
         const result = await prisma.record.create({
             data: {
                 value,
@@ -15,7 +15,7 @@ class RecordPrismaRepository implements RecordRepository {
             }
         });
 
-        return result.id;
+        return result;
     }
 
     public async findAll(user_id: number): Promise<Record[]> {
