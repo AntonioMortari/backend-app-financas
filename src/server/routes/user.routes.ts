@@ -4,7 +4,8 @@ import { UserPrismaRepository } from '../repositories/User/UserPrismaRepository'
 import { UserService } from '../services/UserService';
 import { UserController } from '../controllers/UserController';
 import { isAuth } from '../middlewares/isAuth';
-import { destroyUserValidation, storeUserValidation } from '../validations/celebrate/User';
+import { storeUserValidation } from '../validations/celebrate/User';
+import { byIdValidation } from '../validations/celebrate';
 
 const router: Router = Router();
 
@@ -17,7 +18,7 @@ router.post('/', storeUserValidation, async (req: Request, res: Response) => {
     await userController.store(req, res);
 });
 
-router.delete('/:id', destroyUserValidation, isAuth, async (req: Request, res: Response) => {
+router.delete('/:id', byIdValidation, isAuth, async (req: Request, res: Response) => {
     await userController.destroy(req, res);
 });
 
