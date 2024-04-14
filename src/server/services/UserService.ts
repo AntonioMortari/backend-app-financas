@@ -45,7 +45,7 @@ class UserService {
             throw new AppError('Email or password incorrects', StatusCodes.BAD_REQUEST);
         }
 
-        const token = sign({ decoded: findUser.id.toString(), expiresIn: '1h' });
+        const token = sign({ sub: findUser.id.toString(), expiresIn: '1h' });
 
         return token;
 

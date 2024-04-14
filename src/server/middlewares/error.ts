@@ -10,6 +10,8 @@ const errorMiddleware = (
     next: NextFunction
 ) => {
 
+    console.log(error);
+
     const statusCode = typeof error.getStatusCode == 'function' ? error.getStatusCode() : StatusCodes.INTERNAL_SERVER_ERROR;
     const message = typeof error.getStatusCode == 'function' ? error.message : 'Internal Server Error';
 

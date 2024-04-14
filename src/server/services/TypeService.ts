@@ -27,6 +27,8 @@ class TypeService {
         if(!findType){
             throw new AppError('Type not found', StatusCodes.NOT_FOUND);
         }
+
+        await this.repository.delete(id);
     }
 
 }

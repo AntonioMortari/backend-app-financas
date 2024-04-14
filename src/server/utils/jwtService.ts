@@ -3,11 +3,11 @@ import { AppError } from '../errors/AppError';
 import { StatusCodes } from 'http-status-codes';
 
 interface IJwtData {
-    decoded: string;
+    sub: string;
     expiresIn: string;
 }
 
-const sign = ({ decoded, expiresIn }: IJwtData): string => {
+const sign = ({ sub, expiresIn }: IJwtData): string => {
 
     const SECRET_JWT = process.env.SECRET_JWT;
 
@@ -15,7 +15,7 @@ const sign = ({ decoded, expiresIn }: IJwtData): string => {
         throw new AppError('JWT key is missing', StatusCodes.INTERNAL_SERVER_ERROR);
     }
 
-    const token = jwt.sign(decoded, SECRET_JWT, {
+    const token = jwt.sign({sub: sub}, SECRET_JWT, {
         expiresIn,
     });
 
