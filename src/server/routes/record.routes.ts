@@ -5,6 +5,8 @@ import { RecordPrismaRepository } from '../repositories/Record/RecordPrismaRepos
 import { RecordService } from '../services/RecordService';
 import { RecordController } from '../controllers/RecordController';
 import { isAuth } from '../middlewares/isAuth';
+import { editRecordValidation, storeRecordValidation } from '../validations/celebrate/Record';
+import { byIdValidation } from '../validations/celebrate';
 
 const router: Router = Router();
 
@@ -18,15 +20,15 @@ router.get('/', isAuth, async (req: Request, res: Response) => {
     await recordController.index(req, res);
 });
 
-router.post('/', isAuth, async (req: Request, res: Response) => {
+router.post('/', isAuth, storeRecordValidation, async (req: Request, res: Response) => {
     await recordController.store(req, res);
 });
 
-router.delete('/:id', isAuth, async (req: Request, res: Response) => {
+router.delete('/:id', isAuth, byIdValidation, async (req: Request, res: Response) => {
     await recordController.destroy(req, res);
 });
 
-router.put('/:id', isAuth, async (req: Request, res: Response) => {
+router.put('/:id', isAuth, byIdValidation, editRecordValidation, async (req: Request, res: Response) => {
     await recordController.edit(req, res);
 });
 
